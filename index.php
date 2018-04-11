@@ -6,5 +6,7 @@
   </head>
   <body>
     bal bla bala
+    <div>Changes</div>
+    I am the bla bla king
   </body>
 </html>
