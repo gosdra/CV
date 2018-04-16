@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+
 body, html {
   height: 100%;
 }
@@ -33,7 +35,7 @@ a:link, a:visited {
 .caption::after {
  display: inline-block;
  content: "";
- border-bottom: .2rem solid white;
+ border-bottom: .2rem solid #e0e0e0;
  width: 6rem;
  margin: 0 1rem;
  transform: translateY(-1rem);
@@ -50,7 +52,6 @@ h1.caption {
 }
 
 p {
-  margin-top: 20px;
   line-height: 30px;
   color: #e0e0e0;
 }
@@ -58,10 +59,9 @@ h4{
   margin-top: 10px;
   color: #e0e0e0;
   font-family: 'Source Sans Pro', sans-serif;
+  margin-bottom: 20px;
 }
 
 ul{
   list-style-type:none;
 }
-
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');

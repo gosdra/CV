@@ -9,15 +9,18 @@ $experience = new experience;
 
 if(isset($_SESSION['logged_in'])) {
 
-  if(isset($_POST['content'])){
+  if(isset($_POST['title'], $_POST['content'])){
+    $title = $_POST['title'];
     $content = nl2br($_POST['content']);
     $id= $_POST['id'];
-    if(empty($content)) {
+    if(empty($title) or empty($content)) {
       $error = 'Cannot submit empty!';
     } else {
-      $query = $pdo->prepare('UPDATE experience SET experience_content = ? WHERE experience_id = ?');
-      $query->bindValue(1, $content);
-      $query->bindValue(2, $id);
+      $query = $pdo->prepare('UPDATE experience SET experience_title = ?, experience_content = ? WHERE experience_id = ?');
+      $query->bindValue(1, $title);
+      $query->bindValue(2, $content);
+      $query->bindValue(3, $id);
+
       $query->execute();
       header('Location: index.php');
     }
@@ -51,11 +54,6 @@ integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN
         <a href="index.php" id="experience">What I've done so far</a>
         <h4>Select an experience to edit</h4>
 
-        <?php if(isset($error)) { ?>
-            <small style="color:red;"><?php echo $error; ?></small>
-            </br></br>
-        <?php } ?>
-
         <form action="edit.php" method="POST">
           <select onchange="this.form.submit();" name="id">
               <?php foreach($experiences as $experience) { ?>
@@ -65,6 +63,7 @@ integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN
               <?php } ?>
           </select>
         </br></br>
+            <textarea rows="1" cols="30" name="title" placeholder="Title"><?php echo $data['experience_title']; ?></textarea></br>
             <textarea rows="15" cols="50" name="content" placeholder="Content"><?php echo $data['experience_content']; ?></textarea></br>
             <input type="submit" value="Edit Experience"/>
         </form>
