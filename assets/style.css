@@ -5,7 +5,7 @@ body, html {
 a:link, a:visited {
   text-decoration: none;
   font-weight: bold;
-  color: #2b313a;
+  color: #e0e0e0;
 }
 
 .parallax {
@@ -22,10 +22,10 @@ a:link, a:visited {
 .caption {
  position: absolute;
  left: 0;
- top: 25%;
+ top: 28%;
  width: 100%;
  text-align: center;
- color: white;
+ color: #e0e0e0;
  font-family: sans-serif;
 }
 
@@ -46,15 +46,17 @@ h1.caption {
 .jumbotron-fluid {
   padding: 40px 40px;
   margin: 0px;
-  background-color: #e9ecc1;
+  background: url('wall.jpg');
 }
 
 p {
   margin-top: 20px;
   line-height: 30px;
+  color: #e0e0e0;
 }
 h4{
   margin-top: 10px;
+  color: #e0e0e0;
 }
 
 ul{

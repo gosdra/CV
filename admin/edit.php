@@ -2,23 +2,30 @@
 
 session_start();
 include_once('../includes/connection.php');
+include_once('../includes/experience.php');
+
+$experience = new experience;
+
 
 if(isset($_SESSION['logged_in'])) {
-  if(isset($_POST['title'], $_POST['content'])){
-    $title = $_POST['title'];
+
+  if(isset($_POST['content'])){
     $content = nl2br($_POST['content']);
-
-    if(empty($title) or empty($content)) {
-      $error = 'All fields are required!';
+    $id= $_POST['id'];
+    if(empty($content)) {
+      $error = 'Cannot submit empty!';
     } else {
-      $query = $pdo->prepare('INSERT INTO experience (experience_title, experience_content) VALUES(?,?)');
-      $query->bindValue(1, $title);
-      $query->bindValue(2, $content);
-
+      $query = $pdo->prepare('UPDATE experience SET experience_content = ? WHERE experience_id = ?');
+      $query->bindValue(1, $content);
+      $query->bindValue(2, $id);
       $query->execute();
       header('Location: index.php');
     }
   }
+  $experiences = $experience->fetch_all();
+
+  $data = $experience->fetch_data($id);
+
 ?>
 
 <!DOCTYPE html>
@@ -42,17 +49,24 @@ integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN
       <div class="container">
 
         <a href="index.php" id="experience">What I've done so far</a>
-        </br>
-        <h4>Add Experience</h4>
+        <h4>Select an experience to edit</h4>
+
         <?php if(isset($error)) { ?>
             <small style="color:red;"><?php echo $error; ?></small>
             </br></br>
         <?php } ?>
 
-        <form action="add.php" method="POST">
-          <input type="text" name="title" placeholder="Title"/></br></br>
-          <textarea rows="15" cols="50" name="content" placeholder="Content"></textarea></br>
-          <input type="submit" value="Add Experience"/>
+        <form action="edit.php" method="POST">
+          <select onchange="this.form.submit();" name="id">
+              <?php foreach($experiences as $experience) { ?>
+                  <option value="<?php echo $experience['experience_id']; ?>" <?php if($experience['experience_id'] == $_POST['id']): ?> selected="selected"<?php endif; ?>>
+                      <?php echo $experience['experience_title']; ?>
+                  </option>
+              <?php } ?>
+          </select>
+        </br></br>
+            <textarea rows="15" cols="50" name="content" placeholder="Content"><?php echo $data['experience_content']; ?></textarea></br>
+            <input type="submit" value="Edit Experience"/>
         </form>
       </div>
     </div>
@@ -74,6 +88,7 @@ integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN
 </html>
 
 <?php
+
 } else {
   header('Location: index.php');
 }
