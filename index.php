@@ -7,8 +7,6 @@ $experience = new experience;
 $experiences = $experience->fetch_all();
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +41,11 @@ integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN
       </div>
     </div>
     <div class="parallax"></div>
+    <script>
+      $(window).on('unload', function() {
+        $(window).scrollTop(0);
+      });
+    </script>
     <script
     			  src="http://code.jquery.com/jquery-3.3.1.min.js"
     			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

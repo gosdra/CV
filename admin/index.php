@@ -32,12 +32,18 @@ integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN
         </br>
         <ul>
           <li><a href="add.php">Add Experience</a></li>
+          <li><a href="edit.php">Edit Experience</a></li>
           <li><a href="delete.php">Remove Experience</a></li>
           <li><a href="logout.php">Logout</a></li>
         </ul>
       </div>
     </div>
     <div class="parallax"></div>
+    <script>
+      $(window).on('unload', function() {
+        $(window).scrollTop(0);
+      });
+    </script>
     <script
     			  src="http://code.jquery.com/jquery-3.3.1.min.js"
     			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -112,6 +118,11 @@ integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN
       </div>
     </div>
     <div class="parallax"></div>
+    <script>
+      $(window).on('unload', function() {
+        $(window).scrollTop(0);
+      });
+    </script>
     <script
     			  src="http://code.jquery.com/jquery-3.3.1.min.js"
     			  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
